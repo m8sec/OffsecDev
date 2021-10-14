@@ -36,7 +36,7 @@ class PidAutoSelect {
         {
             if( aProcesses[i] != 0 )
             {
-                // verify each process meets inj criterial
+                // verify each process meets inj criteria
                 ProcessPid( aProcesses[i] );
             }
         }
@@ -93,7 +93,7 @@ class PidAutoSelect {
     }
 
     bool EvalProc(char Name[MAX_NAME], TCHAR ProcessName[MAX_NAME]){
-        // primary injection criteria
+        // Injection criteria
         if (Name != "<null>") 
         {
             if (!_tcscmp(ProcessName, _T("svchost.exe"))){

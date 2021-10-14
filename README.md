@@ -13,15 +13,15 @@ Working repo used to experiment with C++ as it relates to offensive security.
 | File | Description |
 | ---- | ----------- |
 | [proclist.cpp](process_explorer/proclist.cpp) | Extends Microsoft's [EnumProcesses](https://docs.microsoft.com/en-us/windows/win32/psapi/enumerating-all-processes) example to list Name, PID, & owner information for each process. |
-| [local_VirtualAlloc.cpp](shellcode_injection/local_VirtualAlloc.cpp) | Load shellcode into the running process using ```VirtualAlloc()```/```CreateThread()```. |
-| [local_HeapAlloc.cpp](shellcode_injection/local_HeapAlloc.cpp) | Load shellcode into the running process using ```HeapAlloc()```/```CreateThread()```. |
-| [remote_VirtualAllocEx.cpp](shellcode_injection/remote_VirtualAllocEx.cpp) | Inject shellcode into a remote process using ```VirtualAllocEx()```/```CreateRemoteThread()```. PID can be defined in cmd args or chosen automatically using ```PidAutoSelect()```. |
+| [VirtualAlloc_loader.cpp](shellcode_injection/VirtualAlloc_loader.cpp) | Load shellcode into the current process using ```VirtualAlloc```/```CreateThread```.|
+| [HeapAlloc_loader.cpp](shellcode_injection/HeapAlloc_loader.cpp) | Load shellcode into the current process using ```HeapAlloc```/```CreateThread```. |
+| [VirtualAllocEx_inj.cpp](shellcode_injection/VirtualAllocEx_inj.cpp) | Inject shellcode into a remote process using ```VirtualAllocEx```/```CreateRemoteThread```. PID can be defined in cmd args or chosen automatically using ```PidAutoSelect```. |
+| [Suspended_inj.cpp](shellcode_injection/Suspended_inj.cpp) | Inject shellcode in a remote process using ```VirtualAllocEx```/```CreateRemoteThread``` in a suspended state with protection ```PAGE_NOACCESS```. Sleeps to avoid AV before modifying protections and calling ```ResumeThread``` - *Based on [plackyhacker's Suspended-Thread-Injection](https://github.com/plackyhacker/Suspended-Thread-Injection)*|
 
 
 
 
 ## Development Environment
-To this point, the programs listed were created using VS Code and the C/C++ extension. See the post below for setup & compiling instructions:
+To this point, the programs listed were created on Windows 10 using VS Code, and the C/C++ extension. See the post below for setup & compiling instructions:
 * [https://code.visualstudio.com/docs/languages/cpp](https://code.visualstudio.com/docs/languages/cpp)
-
 
