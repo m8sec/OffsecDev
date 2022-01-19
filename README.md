@@ -2,7 +2,7 @@
   <img src="https://user-images.githubusercontent.com/13889819/136234601-95d9e6e5-0353-49fb-9e0b-205359635700.png">
 </p>
   
-# LifeByTheCpp
+# OffsecDev
 Working repo used to experiment with C++ as it relates to offensive security.
 
 ## Table of Contents
