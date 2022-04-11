@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="../_resources/img/0002.png">
+  <img src="../_resources/img/0003.png">
 </p>
 
 # OffsecDev: C#

@@ -21,13 +21,12 @@ As of now, most examples tend to focus on evasion tactics - but not limited to.
 Projects exist for the following languages:
 * [C++](cpp/)
 * [C#](cs/)
-* [Python](py)
 
 ### Recent Updates
 ```txt
-+ Python & C# languages.
++ Add C#.
 + Update scripts/shellcrypt.py.
-+ Local shellcode injection examples in py & cs.
++ Local shellcode injection examples in cs.
 ```
 
 ### Disclaimer
