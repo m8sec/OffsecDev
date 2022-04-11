@@ -26,7 +26,7 @@ Projects exist for the following languages:
 ```txt
 + Add C#.
 + Update scripts/shellcrypt.py.
-+ Local shellcode injection examples in cs.
++ Classic shellcode injection examples in C#.
 ```
 
 ### Disclaimer
