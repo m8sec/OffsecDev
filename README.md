@@ -1,27 +1,34 @@
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/13889819/136234601-95d9e6e5-0353-49fb-9e0b-205359635700.png">
+  <img src="_resources/img/0000.png">
+  <br><br>
+  <a href="https://twitter.com/m8r0wn">
+    <img src="https://img.shields.io/twitter/follow/m8r0wn?color=blue&label=Twitter&logo=twitter&style=plastic">
+  </a>
+  <a href="https://github.com/m8r0wn">
+    <img src="https://img.shields.io/github/followers/m8r0wn?color=gray&label=GitHub&logo=github&style=plastic">
+  </a>
+  <a href="https://github.com/sponsors/m8r0wn">
+    <img src="https://img.shields.io/badge/Sponsor-GitHub-red?style=plastic&logo=github">
+  </a>
 </p>
-  
+
 # OffsecDev
-Working repo used to experiment with C++ as it relates to offensive security.
+This is a working repo used to experiment with various languages as it relates to offensive security. 
 
-## Table of Contents
-  * [Examples](#examples)
-  * [Development Environment](#development-environment)
+As of now, most examples tend to focus on evasion tactics - but not limited to. 
 
-## Examples
-| File | Description |
-| ---- | ----------- |
-| [proclist.cpp](process_explorer/proclist.cpp) | Extends Microsoft's [EnumProcesses](https://docs.microsoft.com/en-us/windows/win32/psapi/enumerating-all-processes) example to list Name, PID, & owner information for each process. |
-| [VirtualAlloc_loader.cpp](shellcode_injection/VirtualAlloc_loader.cpp) | Load shellcode into the current process using ```VirtualAlloc```/```CreateThread```.|
-| [HeapAlloc_loader.cpp](shellcode_injection/HeapAlloc_loader.cpp) | Load shellcode into the current process using ```HeapAlloc```/```CreateThread```. |
-| [VirtualAllocEx_inj.cpp](shellcode_injection/VirtualAllocEx_inj.cpp) | Inject shellcode into a remote process using ```VirtualAllocEx```/```CreateRemoteThread```. PID can be defined in cmd args or chosen automatically using ```PidAutoSelect```. |
-| [Suspended_inj.cpp](shellcode_injection/Suspended_inj.cpp) | Inject shellcode in a remote process using ```VirtualAllocEx```/```CreateRemoteThread``` in a suspended state with protection ```PAGE_NOACCESS```. Sleeps to avoid AV before modifying protections and calling ```ResumeThread``` - *Based on [plackyhacker's Suspended-Thread-Injection](https://github.com/plackyhacker/Suspended-Thread-Injection)*.|
+### Languages
+Projects exist for the following languages:
+* [C++](cpp/)
+* [C#](cs/)
+* [Python](py)
 
+### Recent Updates
+```txt
++ Python & C# languages.
++ Update scripts/shellcrypt.py.
++ Local shellcode injection examples in py & cs.
+```
 
-
-
-## Development Environment
-To this point, the programs listed were created on Windows 10 using VS Code and the C/C++ extension. See the post below for setup & compiling instructions:
-* [https://code.visualstudio.com/docs/languages/cpp](https://code.visualstudio.com/docs/languages/cpp)
-
+### Disclaimer
+Never test against systems you don't own of have explicit permission. With great power comes great responsibility. Not responsible for impact on future systems.

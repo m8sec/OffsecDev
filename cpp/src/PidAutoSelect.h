@@ -1,16 +1,14 @@
-/*
-	Author: @m8r0wn
-	
-	Generate list of potentially "injectable" processes
-*/
-
 #include <windows.h>
 #include <stdio.h>
 #include <tchar.h>
 #include <psapi.h>
 #include <iostream>
 #include <string>
-#define MAX_NAME 256
+#define MAX_NAME
+
+/*
+	Author: @m8r0wn
+*/
 
 class PidAutoSelect {
     public:
