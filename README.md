@@ -30,4 +30,4 @@ Projects exist for the following languages:
 ```
 
 ### Disclaimer
-Never test against systems you don't own of have explicit permission. With great power comes great responsibility. Not responsible for impact on future systems.
+Never test against systems you don't own or have explicit permission. With great power comes great responsibility. Not responsible for impact on future systems.
