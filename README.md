@@ -13,7 +13,7 @@
 </p>
 
 # OffsecDev
-Working repo used to experiment with various languages as it relates to offensive security.
+Working repo used to experiment with various languages as it relates to offensive security, malware development, and evasion.
 
 ### Languages
 * [Py](py/)
