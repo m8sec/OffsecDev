@@ -3,7 +3,7 @@
 </p>
 
 # Python
-With a little work, Python can still be a great tool to use on modern red teaming engagements.
+The `python.exe` binary has a high reputational score and is (likely) used to execute many legitimate applications within an organization. Therefore, with a little work, Python can still be a great language to use in red teaming engagements and help evade modern defenses. 
 
 ### Table of Contents
   * [Examples](#examples)
@@ -13,7 +13,7 @@ With a little work, Python can still be a great tool to use on modern red teamin
 ## Examples
 | File                                           | Description                                                                            |
 |------------------------------------------------|----------------------------------------------------------------------------------------|
-| [shellcode_runner.py](src/shellcode_loader.py) | Injects shellcode into the current process with ```VirtualAlloc```/```CreateThread```. |
+| [shellcode_runner.py](src/shellcode_runner.py) | Injects shellcode into the current process with ```VirtualAlloc```/```CreateThread```. |
 | [decrypt_bytecode.py](src/decrypt_bytecode.py) | Decrypt AES encrypted bytecode files by pyinstaller.                                                                                       |
 
 
