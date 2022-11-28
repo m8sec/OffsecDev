@@ -1,20 +1,17 @@
 #!/usr/bin/env python3
-
-'''
-Author: m8r0wn
-Shellcode obfuscation / encryption script
-
-Usage:
-msfvenom -p /windows/x64/exec CMD="calc.exe" -f raw -o shellcode.bin
-python3 shellcrypt.py calc.bin -f c -e xor
-
-Requirements
-    pycryptodome
-
-References:
-    https://github.com/Arno0x/ShellcodeWrapper
-    Sektor7 RTO
-'''
+# Author: m8r0wn
+# Description: Shellcode obfuscation / encryption script
+#
+# Usage:
+#   msfvenom -p /windows/x64/exec CMD="calc.exe" -f raw -o shellcode.bin
+#   python3 shellcrypt.py calc.bin -f c -e xor
+#
+# Requirements
+#    pycryptodome
+#
+#References:
+#    https://github.com/Arno0x/ShellcodeWrapper
+#    Sektor7 RTO
 
 import os
 import sys

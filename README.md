@@ -7,27 +7,25 @@
   <a href="https://github.com/m8sec">
     <img src="https://img.shields.io/github/followers/m8sec?color=gray&label=GitHub&logo=github&style=plastic">
   </a>
-  <a href="https://github.com/sponsors/m8sec">
-    <img src="https://img.shields.io/badge/Sponsor-GitHub-red?style=plastic&logo=github">
+  <a href="https://www.youtube.com/@m8sec">
+    <img src="https://img.shields.io/badge/Demos-YouTube-red?style=plastic&logo=youtube">
   </a>
 </p>
 
 # OffsecDev
-This is a working repo used to experiment with various languages as it relates to offensive security. 
-
-As of now, most examples tend to focus on evasion tactics - but not limited to. 
+Working repo used to experiment with various languages as it relates to offensive security.
 
 ### Languages
-Projects exist for the following languages:
-* [C++](cpp/)
-* [C#](cs/)
+* [Py](py/)
 
 ### Recent Updates
 ```txt
-+ Add C#.
-+ Update scripts/shellcrypt.py.
-+ Classic shellcode injection examples in C#.
++ py directory
++ Update scripts/shellcrypt.py
++ Python shellcode Runner
+- cpp directory (temporarily)
+- cs directory (temporarily)
 ```
 
 ### Disclaimer
-Never test against systems you don't own or have explicit permission. With great power comes great responsibility. Not responsible for impact on future systems.
+All information is provided for educational purposes ONLY. Never test against systems you don't own or have explicit permission. Use at your own risk - not responsible for impact on future systems. With great power comes great responsibility. 
