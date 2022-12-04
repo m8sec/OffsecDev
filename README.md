@@ -13,9 +13,11 @@
 </p>
 
 # OffsecDev
-Working repo used to experiment with various languages as it relates to offensive security, malware development, and evasion.
+Working repo used to experiment with various languages as it relates to offensive security.
 
 ### Languages
+* [C++](cpp/)
+* * [C#](cs/)
 * [Py](py/)
 
 ### Recent Updates

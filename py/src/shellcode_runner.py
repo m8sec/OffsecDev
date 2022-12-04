@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-#
 # Author: @m8sec
 # Description: Standard shellcode runner to inject shellcode into the current process
 # Evasion test: Windows 10 Enterprise

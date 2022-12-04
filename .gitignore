@@ -1,5 +1,6 @@
 # VSCode Compile Tasks
 .vscode
+.vs
 
 # Prerequisites
 *.d
