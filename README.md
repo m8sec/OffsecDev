@@ -17,16 +17,18 @@ Working repo used to experiment with various languages as it relates to offensiv
 
 ### Languages
 * [C++](cpp/)
-* * [C#](cs/)
+* [C#](cs/)
 * [Py](py/)
 
 ### Recent Updates
 ```txt
++ cpp directory
++ suspended_injection.cpp
++ cs directory
++ shellcode_runner.cs
 + py directory
 + Update scripts/shellcrypt.py
 + Python shellcode Runner
-- cpp directory (temporarily)
-- cs directory (temporarily)
 ```
 
 ### Disclaimer

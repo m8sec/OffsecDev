@@ -1,4 +1,5 @@
-﻿using System;
+﻿// Author: @m8sec
+using System;
 using System.Runtime.InteropServices;
 
 public class shellcode_runner

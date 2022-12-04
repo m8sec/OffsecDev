@@ -1,6 +1,5 @@
 /*
-	Author: @m8r0wn
-
+	Author: @m8sec
 	References:
 		https://github.com/plackyhacker/SuspendedThreadInjection
 		https://labs.f-secure.com/blog/bypassing-windows-defender-runtime-scanning/
