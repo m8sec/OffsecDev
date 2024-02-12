@@ -1,15 +1,8 @@
 <p align="center">
   <img src="_resources/img/0000.png">
   <br><br>
-  <a href="https://twitter.com/m8sec">
-    <img src="https://img.shields.io/twitter/follow/m8sec?color=blue&label=Twitter&logo=twitter&style=plastic">
-  </a>
-  <a href="https://github.com/m8sec">
-    <img src="https://img.shields.io/github/followers/m8sec?color=gray&label=GitHub&logo=github&style=plastic">
-  </a>
-  <a href="https://www.youtube.com/@m8sec">
-    <img src="https://img.shields.io/badge/Demos-YouTube-red?style=plastic&logo=youtube">
-  </a>
+  <a href="https://github.com/m8sec"><img src="https://img.shields.io/github/followers/m8sec?color=gray&label=GitHub&logo=github&style=plastic"></a>
+  <a href="https://www.youtube.com/@m8sec"><img src="https://img.shields.io/badge/Demos-YouTube-red?style=plastic&logo=youtube"></a>
 </p>
 
 # OffsecDev
